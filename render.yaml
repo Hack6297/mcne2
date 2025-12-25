@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: minecraft-nesa-explorer-5
+    runtime: static
+    buildCommand: echo "No build needed"
+    staticPublishPath: .
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /vanilla.html
