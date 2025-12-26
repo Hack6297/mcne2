@@ -882,9 +882,9 @@
             }
         }
         
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        const renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: 'high-performance' });
         renderer.setSize(gameWidth, gameHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Limit for performance
         renderer.sortObjects = false; // Disable sorting for performance
         
         // Multiplayer message handler
@@ -1521,6 +1521,15 @@
         let isLocked = false;
         let justLocked = false;
 
+        // Add browser prefixes for pointer lock support
+        renderer.domElement.requestPointerLock = renderer.domElement.requestPointerLock ||
+                                                  renderer.domElement.mozRequestPointerLock ||
+                                                  renderer.domElement.webkitRequestPointerLock;
+
+        document.exitPointerLock = document.exitPointerLock ||
+                                   document.mozExitPointerLock ||
+                                   document.webkitExitPointerLock;
+
         renderer.domElement.addEventListener('click', (e) => {
             if (!isLocked) {
                 e.preventDefault();
@@ -1531,9 +1540,16 @@
             }
         });
 
-        document.addEventListener('pointerlockchange', () => {
-            isLocked = document.pointerLockElement === renderer.domElement;
-        });
+        // Listen to all browser-prefixed pointer lock events
+        document.addEventListener('pointerlockchange', onPointerLockChange);
+        document.addEventListener('mozpointerlockchange', onPointerLockChange);
+        document.addEventListener('webkitpointerlockchange', onPointerLockChange);
+
+        function onPointerLockChange() {
+            isLocked = document.pointerLockElement === renderer.domElement ||
+                       document.mozPointerLockElement === renderer.domElement ||
+                       document.webkitPointerLockElement === renderer.domElement;
+        }
 
         document.addEventListener('mousemove', (e) => {
             if (!isLocked) return;
