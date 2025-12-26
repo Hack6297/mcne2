@@ -1481,9 +1481,69 @@
             if (e.code === 'Digit7') selectSlot(6);
             if (e.code === 'Digit8') selectSlot(7);
             if (e.code === 'Digit9') selectSlot(8);
-            // Arrow keys to scroll blocks
-            if (e.code === 'ArrowRight') scrollBlocks(1);
-            if (e.code === 'ArrowLeft') scrollBlocks(-1);
+            // Arrow keys are handled in animation loop for smooth camera rotation
+            
+            // Q to break block, E to place block
+            if (e.code === 'KeyQ' && isLocked && targetBlock) {
+                // Break block
+                const { x, y, z } = targetBlock;
+                const key = `${x},${y},${z}`;
+                world[key] = null;
+                regenerateChunk(x, z);
+                
+                // Create break particles
+                const blockType = targetBlock.type;
+                const blockColors = {
+                    'grass': 0x7CFC00, 'dirt': 0x8B4513, 'stone': 0x808080,
+                    'coal_ore': 0x333333, 'iron_ore': 0xC77B00, 
+                    'gold_ore': 0xFFD700, 'diamond_ore': 0x00FFFF
+                };
+                const color = blockColors[blockType] || 0x8B4513;
+                for (let i = 0; i < 8; i++) {
+                    createParticle(
+                        x + Math.random(),
+                        y + Math.random(), 
+                        z + Math.random(),
+                        color
+                    );
+                }
+                
+                // Broadcast to multiplayer
+                if (socket) {
+                    const msg = {
+                        type: 'blockBroken',
+                        x: x,
+                        y: y,
+                        z: z,
+                        senderId: myPlayerId
+                    };
+                    sendMultiplayer(msg);
+                }
+            }
+            
+            if (e.code === 'KeyE' && isLocked && targetBlock && targetBlock.adjacent) {
+                // Place block
+                const { x, y, z } = targetBlock.adjacent;
+                const key = `${x},${y},${z}`;
+                const existingBlock = world[key];
+                if (!existingBlock) {
+                    world[key] = { type: blockTypes[selectedBlock].name.toLowerCase().replace(/ /g, '_'), x, y, z };
+                    regenerateChunk(x, z);
+                    
+                    // Broadcast to multiplayer
+                    if (socket) {
+                        const msg = {
+                            type: 'blockPlaced',
+                            blockType: blockTypes[selectedBlock].name.toLowerCase().replace(/ /g, '_'),
+                            x: x,
+                            y: y,
+                            z: z,
+                            senderId: myPlayerId
+                        };
+                        sendMultiplayer(msg);
+                    }
+                }
+            }
         });
         document.addEventListener('keyup', (e) => keys[e.code] = false);
 
@@ -1502,14 +1562,14 @@
                 <h3>⛏️ Minecraft Nesa Explorer 5 ⛏️</h3>
                 <p><strong>Click to start</strong><br>
                 WASD: Move<br>
-                Mouse: Look<br>
+                Mouse / Arrow Keys: Look<br>
                 Space: Fly Up<br>
                 Shift: Fly Down<br>
+                Q: Break Block<br>
+                E: Place Block<br>
                 I: Inventory<br>
                 1-9: Hotbar slots<br>
-                Mouse Wheel / ←→: Scroll blocks<br>
-                Left Click: Break<br>
-                Right Click: Place<br>
+                Mouse Wheel: Scroll blocks<br>
                 <strong style="color: #FFD700;">Block: ${blockTypes[selectedBlock].name} (${selectedBlockIndex + 1}/${allBlocks.length})</strong><br>
                 <em>World: 1024x1024 Beta Terrain</em></p>
             `;
@@ -1557,6 +1617,27 @@
             pitch -= e.movementY * 0.002;
             pitch = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, pitch));
         });
+        
+        // Arrow key camera rotation (smooth)
+        function handleArrowKeyRotation() {
+            if (!isLocked) return;
+            const rotationSpeed = 0.05;
+            
+            if (keys['ArrowLeft']) {
+                yaw += rotationSpeed;
+            }
+            if (keys['ArrowRight']) {
+                yaw -= rotationSpeed;
+            }
+            if (keys['ArrowUp']) {
+                pitch += rotationSpeed;
+                pitch = Math.min(Math.PI / 2, pitch);
+            }
+            if (keys['ArrowDown']) {
+                pitch -= rotationSpeed;
+                pitch = Math.max(-Math.PI / 2, pitch);
+            }
+        }
 
         // Raycaster for block placement/breaking
         const raycaster = new THREE.Raycaster();
@@ -2668,6 +2749,9 @@
             requestAnimationFrame(animate);
             
             if (!gameStarted) return; // Don't update before game starts
+
+            // Handle arrow key camera rotation
+            handleArrowKeyRotation();
 
             // Update camera rotation
             camera.quaternion.setFromEuler(new THREE.Euler(pitch, yaw, 0, 'YXZ'));
