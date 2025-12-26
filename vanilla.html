@@ -968,6 +968,33 @@
 
         // Texture loader
         const textureLoader = new THREE.TextureLoader();
+        const loadedTextures = new Set();
+        const failedTextures = new Set();
+        
+        // Create fallback texture
+        function createFallbackTexture(color = '#808080') {
+            const canvas = document.createElement('canvas');
+            canvas.width = 16;
+            canvas.height = 16;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = color;
+            ctx.fillRect(0, 0, 16, 16);
+            // Add checkerboard pattern to indicate missing texture
+            ctx.fillStyle = '#666666';
+            for (let x = 0; x < 16; x += 4) {
+                for (let y = 0; y < 16; y += 4) {
+                    if ((x + y) % 8 === 0) {
+                        ctx.fillRect(x, y, 4, 4);
+                    }
+                }
+            }
+            const texture = new THREE.CanvasTexture(canvas);
+            texture.magFilter = THREE.NearestFilter;
+            texture.minFilter = THREE.NearestFilter;
+            return texture;
+        }
+        
+        const fallbackTexture = createFallbackTexture();
         
         // Load actual block textures from textures directory
         function loadTexture(filename) {
@@ -976,17 +1003,21 @@
                 // Success callback
                 (tex) => {
                     console.log(`✓ Successfully loaded: textures/${filename}`);
-                    console.log('Texture size:', tex.image.width, 'x', tex.image.height);
+                    loadedTextures.add(filename);
                 },
                 // Progress callback
                 undefined,
                 // Error callback
                 (err) => {
                     console.error(`✗ Failed to load: textures/${filename}`, err);
+                    failedTextures.add(filename);
+                    // Replace with fallback
+                    texture.image = fallbackTexture.image;
+                    texture.needsUpdate = true;
                 }
             );
-            texture.magFilter = THREE.LinearFilter;
-            texture.minFilter = THREE.LinearFilter;
+            texture.magFilter = THREE.NearestFilter;
+            texture.minFilter = THREE.NearestFilter;
             return texture;
         }
         
@@ -1073,9 +1104,9 @@
             // SAND & SANDSTONE
             sand: { texture: loadTexture('unique_stonesand.png'), name: 'Unique Sand' },
             sandstone: { 
-                texture: loadTexture('sandstone_top.png'), 
-                sideTexture: loadTexture('sandstone_side.png'),
-                bottomTexture: loadTexture('sandstone_bottom.png'),
+                texture: loadTexture('sand_stone2.png'), 
+                sideTexture: loadTexture('sand_stone2.png'),
+                bottomTexture: loadTexture('sand_stone2.png'),
                 name: 'Sandstone' 
             },
             sand_stone2: { 
@@ -1176,7 +1207,7 @@
             tnt: { 
                 texture: loadTexture('tnt_top.png'), 
                 sideTexture: loadTexture('tnt_side.png'),
-                bottomTexture: loadTexture('tnt_bottom.png'),
+                bottomTexture: loadTexture('tnt_top.png'),
                 name: 'TNT' 
             },
             
@@ -1247,13 +1278,13 @@
             // FLOWERS & DECORATIONS
             red_flower: { texture: loadTexture('red_flower.png'), name: 'Red Flower' },
             yellow_flower: { texture: loadTexture('yello_flower.png'), name: 'Yellow Flower' },
-            red_mushroom: { texture: loadTexture('mushroom_red.png'), name: 'Red Mushroom' },
+            red_mushroom: { texture: loadTexture('red_flower.png'), name: 'Red Mushroom' },
             brown_mushroom: { texture: loadTexture('mushroom_brown.png'), name: 'Brown Mushroom' },
             bush: { texture: loadTexture('oak_leaves.png'), name: 'Bush' },
             sugar_cane: { texture: loadTexture('sugar_cane.png'), name: 'Sugar Cane' },
             
             // SAPLINGS
-            oak_sapling: { texture: loadTexture('sapling_oak.png'), name: 'Oak Sapling' },
+            oak_sapling: { texture: loadTexture('oak_sapling.png'), name: 'Oak Sapling' },
             birch_sapling: { texture: loadTexture('birch_sapling.png'), name: 'Birch Sapling' },
             snow_sapling: { texture: loadTexture('snow_tree_sapling.png'), name: 'Snow Sapling' },
             
@@ -1284,6 +1315,17 @@
                 hotbarSlots.push(i);
             }
             populateInventory();
+            
+            // Report texture loading status after a short delay
+            setTimeout(() => {
+                console.log(`\n=== Texture Loading Report ===`);
+                console.log(`✓ Successfully loaded: ${loadedTextures.size} textures`);
+                console.log(`✗ Failed to load: ${failedTextures.size} textures`);
+                if (failedTextures.size > 0) {
+                    console.log(`Failed textures:`, Array.from(failedTextures));
+                }
+                console.log(`=============================\n`);
+            }, 2000);
         }
 
         function populateInventory() {
