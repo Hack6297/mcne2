@@ -8,38 +8,41 @@
         body {
             margin: 0;
             overflow: hidden;
-            font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
-            background: #008080;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(180deg, #4682B4 0%, #1E3A5F 100%);
             display: flex;
             justify-content: center;
             align-items: center;
         }
         #win98-frame {
-            width: 90vw;
-            height: 90vh;
-            background: #C0C0C0;
-            border: 3px solid;
-            border-color: #FFFFFF #000000 #000000 #FFFFFF;
-            box-shadow: inset 1px 1px 0 #DFDFDF, inset -1px -1px 0 #808080;
+            width: 1280px;
+            height: 720px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
         #win98-titlebar {
-            background: linear-gradient(to right, #000080, #1084D0);
+            background: linear-gradient(180deg, rgba(185, 209, 234, 0.9) 0%, rgba(51, 94, 168, 0.9) 50%, rgba(43, 82, 150, 0.9) 51%, rgba(28, 58, 112, 0.9) 100%);
             color: white;
-            padding: 3px 5px;
-            font-weight: bold;
-            font-size: 12px;
+            padding: 8px 12px;
+            font-weight: 600;
+            font-size: 13px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
         #win98-content {
             flex: 1;
             background: #000000;
-            border: 2px solid;
-            border-color: #808080 #FFFFFF #FFFFFF #808080;
-            margin: 3px;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            margin: 0;
             position: relative;
             overflow: hidden;
         }
@@ -50,8 +53,6 @@
             width: 100% !important;
             height: 100% !important;
             display: block;
-            image-rendering: pixelated;
-            image-rendering: crisp-edges;
         }
         #info {
             position: absolute;
@@ -181,21 +182,24 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #008080;
+            background: linear-gradient(180deg, #4682B4 0%, #1E3A5F 100%);
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             z-index: 2000;
             color: white;
+            overflow-y: auto;
+            padding: 40px 20px;
         }
         #titleScreen h1 {
-            font-size: 48px;
+            font-size: 56px;
             margin-bottom: 40px;
-            text-shadow: 2px 2px 0 #000000;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
             color: #FFFFFF;
-            font-family: 'MS Sans Serif', Tahoma, sans-serif;
-            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-weight: 300;
+            letter-spacing: 2px;
         }
         .world-type-container {
             display: flex;
@@ -203,46 +207,59 @@
             margin-bottom: 30px;
         }
         .world-type-btn {
-            padding: 8px 20px;
+            padding: 10px 24px;
             font-size: 14px;
-            font-weight: bold;
-            font-family: 'MS Sans Serif', Tahoma, sans-serif;
-            border: 2px outset #C0C0C0;
-            background: #C0C0C0;
-            color: #000000;
+            font-weight: 500;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(230, 240, 255, 0.9) 50%, rgba(210, 230, 255, 0.9) 51%, rgba(200, 220, 245, 0.9) 100%);
+            color: #1a1a1a;
             cursor: pointer;
-            box-shadow: 1px 1px 0 #000000;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            transition: all 0.2s ease;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
         }
         .world-type-btn:hover {
-            background: #DFDFDF;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(240, 250, 255, 1) 50%, rgba(220, 240, 255, 1) 51%, rgba(210, 235, 255, 1) 100%);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.9);
         }
         .world-type-btn:active {
-            border-style: inset;
-            box-shadow: inset 1px 1px 2px #000000;
+            background: linear-gradient(180deg, rgba(200, 220, 240, 0.9) 0%, rgba(220, 235, 250, 0.9) 100%);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+            transform: translateY(1px);
         }
         .world-type-btn.selected {
-            background: #000080;
+            background: linear-gradient(180deg, rgba(100, 150, 230, 0.95) 0%, rgba(70, 130, 210, 0.95) 50%, rgba(50, 110, 190, 0.95) 51%, rgba(40, 90, 170, 0.95) 100%);
             color: #FFFFFF;
-            border: 2px inset #000080;
+            border: 1px solid rgba(20, 50, 100, 0.5);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
         }
         #startBtn {
-            padding: 10px 40px;
-            font-size: 16px;
-            font-weight: bold;
-            font-family: 'MS Sans Serif', Tahoma, sans-serif;
-            border: 2px outset #C0C0C0;
-            background: #C0C0C0;
-            color: #000000;
+            padding: 14px 50px;
+            font-size: 18px;
+            font-weight: 600;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            background: linear-gradient(180deg, rgba(120, 190, 120, 0.95) 0%, rgba(90, 170, 90, 0.95) 50%, rgba(70, 150, 70, 0.95) 51%, rgba(60, 130, 60, 0.95) 100%);
+            color: #FFFFFF;
             cursor: pointer;
-            margin-top: 20px;
-            box-shadow: 1px 1px 0 #000000;
+            margin-top: 30px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            transition: all 0.2s ease;
+            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
         }
         #startBtn:hover {
-            background: #DFDFDF;
+            background: linear-gradient(180deg, rgba(140, 210, 140, 0.95) 0%, rgba(110, 190, 110, 0.95) 50%, rgba(90, 170, 90, 0.95) 51%, rgba(80, 150, 80, 0.95) 100%);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            transform: translateY(-1px);
         }
         #startBtn:active {
-            border-style: inset;
-            box-shadow: inset 1px 1px 2px #000000;
+            background: linear-gradient(180deg, rgba(60, 130, 60, 0.95) 0%, rgba(80, 150, 80, 0.95) 100%);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
+            transform: translateY(1px);
         }
         #healthBar {
             position: fixed;
@@ -377,38 +394,44 @@
         }
         #inventoryMenu {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            transform: none;
             background: rgba(198, 198, 198, 0.98);
-            padding: 8px;
+            padding: 20px;
             border: 0;
             border-radius: 0;
             z-index: 1000;
             display: none;
-            box-shadow: 0 0 0 2px #000000;
+            box-shadow: none;
             image-rendering: pixelated;
             image-rendering: crisp-edges;
+            overflow-y: auto;
         }
         #inventoryMenu h2 {
             color: #404040;
-            margin: 8px 8px 16px 8px;
+            margin: 12px 12px 16px 12px;
             font-family: 'Minecraftia', 'MS Sans Serif', monospace;
-            font-size: 16px;
+            font-size: 18px;
             text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+            text-align: center;
         }
         .inventory-grid {
             display: grid;
-            grid-template-columns: repeat(9, 54px);
-            gap: 4px;
-            padding: 8px;
+            grid-template-columns: repeat(10, 64px);
+            gap: 6px;
+            padding: 12px;
             background: rgba(139, 139, 139, 0.8);
             border: 2px solid;
             border-color: #FFFFFF #555555 #555555 #FFFFFF;
+            max-width: 700px;
+            margin: 0 auto;
         }
         .inventory-item {
-            width: 48px;
-            height: 48px;
+            width: 56px;
+            height: 56px;
             background: #8B8B8B;
             border: 2px solid;
             border-color: #373737 #FFFFFF #FFFFFF #373737;
@@ -430,8 +453,8 @@
             box-shadow: inset 0 0 4px rgba(255, 255, 0, 0.5);
         }
         .inventory-item canvas {
-            width: 48px;
-            height: 48px;
+            width: 56px;
+            height: 56px;
             image-rendering: pixelated;
             image-rendering: crisp-edges;
             display: block;
@@ -475,6 +498,10 @@
             <button class="world-type-btn" onclick="selectWorldType('desert')">Desert</button>
             <button class="world-type-btn" onclick="selectWorldType('extreme')">Extreme</button>
             <button class="world-type-btn" onclick="selectWorldType('flat')">Flat</button>
+        </div>
+        <div class="world-type-container" style="margin-top: 20px;">
+            <button class="world-type-btn" onclick="setResolution(1280, 720)">720p HD</button>
+            <button class="world-type-btn" onclick="setResolution(1920, 1080)" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); font-weight: bold;">1080p ULTRA</button>
         </div>
         <button id="startBtn" onclick="startGame()">START GAME</button>
     </div>
@@ -532,6 +559,7 @@
     </div>
     <div id="info">
         <h3>*** MINECRAFT NESA EXPLORER 5 ***</h3>
+        <p id="multiplayerStatus" style="color: #FFD700; font-size: 14px; margin: 5px 0 0 0; font-family: 'Segoe UI', sans-serif;">Multiplayer: Connecting...</p>
     </div>
     <div id="crosshair"></div>
     <div id="hotbar"></div>    
@@ -547,7 +575,60 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
+        // Multiplayer setup with WebSocket
+        let socket = null;
+        let myPlayerId = null;
+        
+        // Detect environment and use appropriate WebSocket URL
+        const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+        const wsHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+            ? 'localhost:8000' 
+            : window.location.host;
+        const wsUrl = `${wsProtocol}//${wsHost}/ws/game/`;
+        
+        try {
+            console.log('Connecting to:', wsUrl);
+            socket = new WebSocket(wsUrl);
+            
+            socket.onopen = () => {
+                console.log('Multiplayer enabled');
+                const statusEl = document.getElementById('multiplayerStatus');
+                if (statusEl) statusEl.textContent = 'Multiplayer: ENABLED ✓';
+                if (statusEl) statusEl.style.color = '#00FF00';
+            };
+            
+            socket.onerror = () => {
+                console.log('Multiplayer connection failed');
+                const statusEl = document.getElementById('multiplayerStatus');
+                if (statusEl) statusEl.textContent = 'Multiplayer: DISABLED (Server offline)';
+                if (statusEl) statusEl.style.color = '#FF6666';
+                socket = null;
+            };
+            
+            socket.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                console.log('[WEBSOCKET] Received:', data.type, data);
+                handleMultiplayerMessage(data);
+            };
+        } catch(e) {
+            console.log('Multiplayer disabled:', e);
+            const statusEl = document.getElementById('multiplayerStatus');
+            if (statusEl) statusEl.textContent = 'Multiplayer: DISABLED';
+            if (statusEl) statusEl.style.color = '#FF6666';
+        }
+        
+        function sendMultiplayer(data) {
+            if (socket && socket.readyState === WebSocket.OPEN) {
+                console.log('[WEBSOCKET] Sending:', data.type, data);
+                socket.send(JSON.stringify(data));
+            } else {
+                console.log('[WEBSOCKET] Cannot send, socket not ready:', socket ? socket.readyState : 'null');
+            }
+        }
+        
         // Game state
+        let worldSeed = 0; // Will be set by server for multiplayer sync
+        let pendingBlocks = null; // Store blocks until terrain is generated
         let selectedWorldType = 'normal';
         let gameStarted = false;
         let playerHealth = 20;
@@ -563,10 +644,7 @@
         let inventoryOpen = false;
         
         // Multiplayer
-        let ws = null;
-        let playerName = '';
         let otherPlayers = {};
-        let isMultiplayer = false;
         
         // Camera mode
         let thirdPerson = false;
@@ -586,6 +664,10 @@
         let lastFpsTime = Date.now();
         let currentFps = 0;
         
+        // Resolution settings
+        let gameWidth = 1280;
+        let gameHeight = 720;
+        
         // Day/night cycle
         let timeOfDay = 6000;
         const dayLength = 20000;
@@ -602,6 +684,21 @@
             { type: 'chicken', color: 0xFFFFFF, size: 0.5 }
         ];
         
+        // Resolution selection
+        function setResolution(width, height) {
+            gameWidth = width;
+            gameHeight = height;
+            const frame = document.getElementById('win98-frame');
+            frame.style.width = width + 'px';
+            frame.style.height = height + 'px';
+            
+            // Highlight selected resolution button
+            document.querySelectorAll('.world-type-container')[1].querySelectorAll('button').forEach(btn => {
+                btn.style.transform = 'scale(1)';
+            });
+            event.target.style.transform = 'scale(1.05)';
+        }
+        
         // Title screen functions
         function selectWorldType(type) {
             selectedWorldType = type;
@@ -617,9 +714,6 @@
             // Ask for nickname
             playerName = prompt('Enter your nickname:', 'Player' + Math.floor(Math.random() * 1000));
             if (!playerName) playerName = 'Player' + Math.floor(Math.random() * 1000);
-            
-            // Try to connect to multiplayer server
-            connectMultiplayer();
             
             document.getElementById('titleScreen').style.display = 'none';
             gameStarted = true;
@@ -713,7 +807,7 @@
                 camera.aspect = 480 / 360;
                 camera.updateProjectionMatrix();
                 if (enableFog) {
-                    scene.fog = new THREE.Fog(0x99CCFF, 12, 24);
+                    scene.fog = new THREE.Fog(0x99CCFF, 16, 32);
                 }
             }
             
@@ -744,9 +838,9 @@
         // Scene setup
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(0x99CCFF); // Beta sky
-        scene.fog = new THREE.Fog(0x99CCFF, 12, 24);
+        scene.fog = new THREE.Fog(0x99CCFF, 16, 32);
 
-        const camera = new THREE.PerspectiveCamera(75, 480 / 360, 0.1, 256);
+        const camera = new THREE.PerspectiveCamera(75, gameWidth / gameHeight, 0.1, 256);
         
         // Create player mesh (for third-person view)
         const playerGeometry = new THREE.BoxGeometry(0.8, 1.8, 0.8);
@@ -788,9 +882,76 @@
             }
         }
         
-        const renderer = new THREE.WebGLRenderer({ antialias: false });
-        renderer.setSize(480, 360);
-        document.body.appendChild(renderer.domElement);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(gameWidth, gameHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.sortObjects = false; // Disable sorting for performance
+        
+        // Multiplayer message handler
+        function handleMultiplayerMessage(data) {
+            if (data.type === 'player_id') {
+                myPlayerId = data.id;
+                worldSeed = data.worldSeed || 0; // Use server's world seed
+                console.log('My player ID:', myPlayerId);
+                console.log('World seed:', worldSeed);
+            }
+            else if (data.type === 'currentPlayers') {
+                Object.keys(data.players).forEach(id => {
+                    if (id !== myPlayerId) {
+                        addOtherPlayer(id, data.players[id]);
+                    }
+                });
+            }
+            else if (data.type === 'existingBlocks') {
+                // Store blocks to load after terrain generation
+                console.log('Received existing blocks:', Object.keys(data.blocks).length);
+                pendingBlocks = data.blocks;
+            }
+            else if (data.type === 'playerJoined') {
+                if (data.player.id !== myPlayerId) {
+                    addOtherPlayer(data.player.id, data.player);
+                }
+            }
+            else if (data.type === 'playerMoved') {
+                if (otherPlayers[data.id]) {
+                    otherPlayers[data.id].position.set(data.x, data.y + 1, data.z);
+                    otherPlayers[data.id].rotation.y = data.rotationY;
+                }
+            }
+            else if (data.type === 'playerLeft') {
+                if (otherPlayers[data.id]) {
+                    scene.remove(otherPlayers[data.id]);
+                    delete otherPlayers[data.id];
+                }
+            }
+            else if (data.type === 'blockPlaced') {
+                console.log('[RECV] blockPlaced:', data);
+                if (data.senderId !== myPlayerId) {
+                    console.log('[APPLY] Placing block at', data.x, data.y, data.z, 'type:', data.blockType);
+                    setBlockType(data.x, data.y, data.z, data.blockType);
+                    regenerateChunksAroundBlock(data.x, data.y, data.z);
+                } else {
+                    console.log('[SKIP] Own block');
+                }
+            }
+            else if (data.type === 'blockBroken') {
+                if (data.senderId !== myPlayerId) {
+                    setBlockType(data.x, data.y, data.z, null);
+                    regenerateChunksAroundBlock(data.x, data.y, data.z);
+                }
+            }
+        }
+        
+        function addOtherPlayer(id, playerData) {
+            // Create player mesh (cyan cube)
+            const playerGeo = new THREE.BoxGeometry(0.6, 1.8, 0.6);
+            const playerMat = new THREE.MeshLambertMaterial({ color: 0x00FFFF });
+            const playerMesh = new THREE.Mesh(playerGeo, playerMat);
+            playerMesh.position.set(playerData.x, playerData.y + 1, playerData.z);
+            scene.add(playerMesh);
+            otherPlayers[id] = playerMesh;
+        }
+        document.getElementById('win98-content').appendChild(renderer.domElement);
 
         // Lighting with day/night system
         ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
@@ -864,45 +1025,244 @@
 
         // Block types with textures - 23 blocks!
         const blockTypes = {
-            // Block types matching provided textures
+            // NATURAL BLOCKS
             grass: { 
                 texture: loadTexture('grass_top.png'), 
                 sideTexture: loadTexture('grass_side.png'),
                 bottomTexture: loadTexture('dirt.png'),
                 name: 'Grass' 
             },
+            snow_grass: { 
+                texture: loadTexture('snow.png'), 
+                sideTexture: loadTexture('snow_grass_side.png'),
+                bottomTexture: loadTexture('dirt.png'),
+                name: 'Snow Grass' 
+            },
+            mycelium: { 
+                texture: loadTexture('mycelium_top.png'), 
+                sideTexture: loadTexture('mycelium_side.png'),
+                bottomTexture: loadTexture('dirt.png'),
+                name: 'Mycelium' 
+            },
             dirt: { texture: loadTexture('dirt.png'), name: 'Dirt' },
+            farmland: { 
+                texture: loadTexture('farmdirt.png'),
+                sideTexture: loadTexture('dirt.png'),
+                bottomTexture: loadTexture('dirt.png'),
+                name: 'Farmland' 
+            },
+            farmland_wet: { 
+                texture: loadTexture('farmdirt_wet.png'),
+                sideTexture: loadTexture('dirt.png'),
+                bottomTexture: loadTexture('dirt.png'),
+                name: 'Wet Farmland' 
+            },
+            
+            // STONE BLOCKS
             stone: { texture: loadTexture('stone.png'), name: 'Stone' },
             cobblestone: { texture: loadTexture('cobblestone.png'), name: 'Cobblestone' },
-            bedrock: { texture: loadTexture('bedrock.png'), name: 'Bedrock' },
-            sand: { texture: loadTexture('sand.png'), name: 'Sand' },
+            deeprock: { texture: loadTexture('deeprock.png'), name: 'Bedrock' },
+            gravel: { texture: loadTexture('gravel.png'), name: 'Gravel' },
+            stone_bricks: { texture: loadTexture('stone_bricks.png'), name: 'Stone Bricks' },
+            chiseled_stone: { texture: loadTexture('chiseld_stone.png'), name: 'Chiseled Stone' },
+            mossy_bricks: { texture: loadTexture('mossy_bricks.png'), name: 'Mossy Bricks' },
+            cracked_bricks: { texture: loadTexture('cracked_bricks.png'), name: 'Cracked Bricks' },
+            end_stone: { texture: loadTexture('end_stone.png'), name: 'End Stone' },
+            obsidian: { texture: loadTexture('obsidian.png'), name: 'Obsidian' },
+            
+            // SAND & SANDSTONE
+            sand: { texture: loadTexture('unique_stonesand.png'), name: 'Unique Sand' },
+            sandstone: { 
+                texture: loadTexture('sandstone_top.png'), 
+                sideTexture: loadTexture('sandstone_side.png'),
+                bottomTexture: loadTexture('sandstone_bottom.png'),
+                name: 'Sandstone' 
+            },
+            sand_stone2: { 
+                texture: loadTexture('sand_stone2.png'),
+                name: 'Smooth Sandstone' 
+            },
+            
+            // WOOD BLOCKS
             oak_log: { 
-                texture: loadTexture('wood_side.png'),
-                sideTexture: loadTexture('wood_side.png'),
-                bottomTexture: loadTexture('wood_top.png'),
+                texture: loadTexture('oak_wood_top.png'),
+                sideTexture: loadTexture('oak_wood_side.png'),
+                bottomTexture: loadTexture('oak_wood_top.png'),
                 name: 'Oak Log' 
             },
-            oak_planks: { texture: loadTexture('oak_planks.png'), name: 'Oak Planks' },
-            oak_leaves: { texture: loadTexture('leaves.png'), name: 'Oak Leaves' },
-            gravel: { texture: loadTexture('gravel.png'), name: 'Gravel' },
+            birch_log: { 
+                texture: loadTexture('oak_wood_top.png'),
+                sideTexture: loadTexture('birch_side.png'),
+                bottomTexture: loadTexture('oak_wood_top.png'),
+                name: 'Birch Log' 
+            },
+            snow_wood: { 
+                texture: loadTexture('oak_wood_top.png'),
+                sideTexture: loadTexture('snow_wood_side.png'),
+                bottomTexture: loadTexture('oak_wood_top.png'),
+                name: 'Snow Wood' 
+            },
+            light_planks: { texture: loadTexture('light_planks.png'), name: 'Light Planks' },
+            dark_planks: { texture: loadTexture('dark_planks.png'), name: 'Dark Planks' },
+            tropic_planks: { texture: loadTexture('tropic_planks.png'), name: 'Tropic Planks' },
+            oak_leaves: { texture: loadTexture('oak_leaves.png'), name: 'Oak Leaves' },
+            
+            // SLABS & CRAFTING
             slab: { 
-                texture: loadTexture('slab_side.png'),
+                texture: loadTexture('slab_top.png'),
                 sideTexture: loadTexture('slab_side.png'),
                 bottomTexture: loadTexture('slab_top.png'),
                 name: 'Slab' 
             },
+            crafting_table: { 
+                texture: loadTexture('crafting_table_top.png'),
+                sideTexture: loadTexture('crafting_table_side.png'),
+                bottomTexture: loadTexture('oak_planks.png'),
+                name: 'Crafting Table' 
+            },
+            
+            // BRICKS & CONSTRUCTION
             bricks: { texture: loadTexture('bricks.png'), name: 'Bricks' },
+            hell_bricks: { texture: loadTexture('hell_bricks.png'), name: 'Nether Bricks' },
+            
+            // ORES
             coal_ore: { texture: loadTexture('coal_ore.png'), name: 'Coal Ore' },
             iron_ore: { texture: loadTexture('iron_ore.png'), name: 'Iron Ore' },
             gold_ore: { texture: loadTexture('gold_ore.png'), name: 'Gold Ore' },
             diamond_ore: { texture: loadTexture('diamond_ore.png'), name: 'Diamond Ore' },
+            lapis_ore: { texture: loadTexture('lapis_ore.png'), name: 'Lapis Ore' },
+            emerald_ore: { texture: loadTexture('emerald_ore.png'), name: 'Emerald Ore' },
+            redstone_ore: { texture: loadTexture('redstone_ore.png'), name: 'Redstone Ore' },
+            
+            // METAL BLOCKS
+            iron_block: { texture: loadTexture('iron_block.png'), name: 'Iron Block' },
+            gold_block: { texture: loadTexture('gold_block.png'), name: 'Gold Block' },
+            diamond_block: { texture: loadTexture('diamond_block.png'), name: 'Diamond Block' },
+            lapis_block: { texture: loadTexture('lapis_block.png'), name: 'Lapis Block' },
+            emerald_block: { texture: loadTexture('emerald_block.png'), name: 'Emerald Block' },
+            
+            // GLASS & SPECIAL
             glass: { texture: loadTexture('glass.png'), name: 'Glass' },
             ice: { texture: loadTexture('ice.png'), name: 'Ice' },
+            glowstone: { texture: loadTexture('glowstone.png'), name: 'Glowstone' },
+            
+            // SNOW & ICE
             snow: { texture: loadTexture('snow.png'), name: 'Snow' },
-            water: { texture: loadTexture('water.png'), name: 'Water' },
-            wool: { texture: loadTexture('wool.png'), name: 'Wool' },
+            
+            // NETHER BLOCKS
+            hellstone: { texture: loadTexture('hellstone.png'), name: 'Netherrack' },
+            soulsand: { texture: loadTexture('soulsand.png'), name: 'Soul Sand' },
+            
+            // WOOL COLORS
+            white_wool: { texture: loadTexture('white_cloth.png'), name: 'White Wool' },
+            red_wool: { texture: loadTexture('red_wool.png'), name: 'Red Wool' },
+            orange_wool: { texture: loadTexture('orange_wool.png'), name: 'Orange Wool' },
+            yellow_wool: { texture: loadTexture('yellow_wool.png'), name: 'Yellow Wool' },
+            lime_wool: { texture: loadTexture('lime_wool.png'), name: 'Lime Wool' },
+            green_wool: { texture: loadTexture('green_cloth.png'), name: 'Green Wool' },
+            cyan_wool: { texture: loadTexture('cyan_wool.png'), name: 'Cyan Wool' },
+            light_blue_wool: { texture: loadTexture('light_blue_wool.png'), name: 'Light Blue Wool' },
+            blue_wool: { texture: loadTexture('blue_wool.png'), name: 'Blue Wool' },
+            purple_wool: { texture: loadTexture('purple_wool.png'), name: 'Purple Wool' },
+            magenta_wool: { texture: loadTexture('magenta_wool.png'), name: 'Magenta Wool' },
+            pink_wool: { texture: loadTexture('pink_wool.png'), name: 'Pink Wool' },
+            brown_wool: { texture: loadTexture('brown_wool.png'), name: 'Brown Wool' },
+            gray_wool: { texture: loadTexture('gray_wool.png'), name: 'Gray Wool' },
+            light_gray_wool: { texture: loadTexture('light_grey_wool.png'), name: 'Light Gray Wool' },
+            dark_gray_wool: { texture: loadTexture('dark_gray_wool.png'), name: 'Dark Gray Wool' },
+            black_wool: { texture: loadTexture('black_wool.png'), name: 'Black Wool' },
+            
+            // TNT & EXPLOSIVES
+            tnt: { 
+                texture: loadTexture('tnt_top.png'), 
+                sideTexture: loadTexture('tnt_side.png'),
+                bottomTexture: loadTexture('tnt_bottom.png'),
+                name: 'TNT' 
+            },
+            
+            // SPECIAL BLOCKS
+            furnace: { 
+                texture: loadTexture('furnace_top.png'), 
+                sideTexture: loadTexture('furnace_side.png'),
+                bottomTexture: loadTexture('furnace_top.png'),
+                name: 'Furnace' 
+            },
+            dispenser: { 
+                texture: loadTexture('furnace_top.png'), 
+                sideTexture: loadTexture('dispenser_front.png'),
+                bottomTexture: loadTexture('furnace_top.png'),
+                name: 'Dispenser' 
+            },
+            note_block: { texture: loadTexture('note_block.png'), name: 'Note Block' },
+            jukebox: { 
+                texture: loadTexture('jukebox.png'), 
+                sideTexture: loadTexture('note_block.png'),
+                bottomTexture: loadTexture('note_block.png'),
+                name: 'Jukebox' 
+            },
+            enchant_table: { 
+                texture: loadTexture('enchanted_table_top.png'), 
+                sideTexture: loadTexture('enchanted_table_side.png'),
+                bottomTexture: loadTexture('obsidian.png'),
+                name: 'Enchant Table' 
+            },
+            end_portal: { 
+                texture: loadTexture('end_portal_top.png'), 
+                sideTexture: loadTexture('end_portal_side.png'),
+                bottomTexture: loadTexture('end_stone.png'),
+                name: 'End Portal' 
+            },
+            dragon_egg: { texture: loadTexture('dragon_egg.png'), name: 'Dragon Egg' },
+            mob_spawner: { texture: loadTexture('mob_spawner.png'), name: 'Mob Spawner' },
+            
+            // FOOD & PLANTS
+            pumpkin: { 
+                texture: loadTexture('pumpkin_top.png'), 
+                sideTexture: loadTexture('pumpkin_side.png'),
+                bottomTexture: loadTexture('pumpkin_top.png'),
+                name: 'Pumpkin' 
+            },
+            melon: { 
+                texture: loadTexture('melon_top.png'), 
+                sideTexture: loadTexture('melon_side.png'),
+                bottomTexture: loadTexture('melon_top.png'),
+                name: 'Melon' 
+            },
+            cake: { 
+                texture: loadTexture('cake_top.png'), 
+                sideTexture: loadTexture('cake_side.png'),
+                bottomTexture: loadTexture('cake_bottom.png'),
+                name: 'Cake' 
+            },
+            cactus: { 
+                texture: loadTexture('cactus_top.png'), 
+                sideTexture: loadTexture('cactus_side.png'),
+                bottomTexture: loadTexture('cactus_bottom.png'),
+                name: 'Cactus' 
+            },
+            mushroom_block: { texture: loadTexture('mushroom_block.png'), name: 'Mushroom Block' },
+            sponge: { texture: loadTexture('sponge.png'), name: 'Sponge' },
+            clay: { texture: loadTexture('clay.png'), name: 'Clay' },
+            
+            // FLOWERS & DECORATIONS
             red_flower: { texture: loadTexture('red_flower.png'), name: 'Red Flower' },
-            yellow_flower: { texture: loadTexture('yellow_flower.png'), name: 'Yellow Flower' }
+            yellow_flower: { texture: loadTexture('yello_flower.png'), name: 'Yellow Flower' },
+            red_mushroom: { texture: loadTexture('mushroom_red.png'), name: 'Red Mushroom' },
+            brown_mushroom: { texture: loadTexture('mushroom_brown.png'), name: 'Brown Mushroom' },
+            bush: { texture: loadTexture('oak_leaves.png'), name: 'Bush' },
+            sugar_cane: { texture: loadTexture('sugar_cane.png'), name: 'Sugar Cane' },
+            
+            // SAPLINGS
+            oak_sapling: { texture: loadTexture('sapling_oak.png'), name: 'Oak Sapling' },
+            birch_sapling: { texture: loadTexture('birch_sapling.png'), name: 'Birch Sapling' },
+            snow_sapling: { texture: loadTexture('snow_tree_sapling.png'), name: 'Snow Sapling' },
+            
+            // MISC
+            water: { texture: loadTexture('water.png'), name: 'Water' },
+            cobweb: { texture: loadTexture('cobwebwww.png'), name: 'Cobweb' },
+            iron_bars: { texture: loadTexture('iron_bars.png'), name: 'Iron Bars' },
+            ladder: { texture: loadTexture('ladder.png'), name: 'Ladder' },
+            trapdoor: { texture: loadTexture('trapdoor.png'), name: 'Trapdoor' }
         };
 
         // Create inventory array
@@ -1144,79 +1504,96 @@
         const raycaster = new THREE.Raycaster();
         raycaster.far = 8;
 
+        // Block highlight cursor
+        const highlightGeometry = new THREE.BoxGeometry(1.01, 1.01, 1.01);
+        const highlightMaterial = new THREE.MeshBasicMaterial({ 
+            color: 0xffffff, 
+            wireframe: true,
+            transparent: true,
+            opacity: 0.5,
+            linewidth: 2
+        });
+        const highlightMesh = new THREE.Mesh(highlightGeometry, highlightMaterial);
+        highlightMesh.visible = false;
+        scene.add(highlightMesh);
+
+        let targetBlock = null; // Store targeted block info
+
         document.addEventListener('mousedown', (e) => {
-            if (!isLocked || justLocked) return;
+            if (!isLocked || justLocked || !targetBlock) return;
             
-            const direction = new THREE.Vector3(0, 0, -1);
-            direction.applyQuaternion(camera.quaternion);
-            
-            raycaster.set(camera.position, direction);
-            
-            const allMeshes = [];
-            for (const chunkKey in chunks) {
-                chunks[chunkKey].children.forEach(mesh => {
-                    allMeshes.push(mesh);
-                    // Add child meshes recursively if any
-                    if (mesh.children && mesh.children.length > 0) {
-                        mesh.children.forEach(child => allMeshes.push(child));
-                    }
-                });
-            }
-            
-            const intersects = raycaster.intersectObjects(allMeshes, true);
-            
-            if (intersects.length > 0) {
-                const intersect = intersects[0];
-                const hitPoint = intersect.point;
-                const normal = intersect.face.normal;
+            if (e.button === 0) {
+                // Left click - break block
+                const { x, y, z } = targetBlock;
+                const key = `${x},${y},${z}`;
+                world[key] = null;
+                regenerateChunk(x, z);
                 
-                if (e.button === 0) {
-                    // Left click - break block
-                    const blockX = Math.floor(hitPoint.x + normal.x * 0.001);
-                    const blockY = Math.floor(hitPoint.y + normal.y * 0.001);
-                    const blockZ = Math.floor(hitPoint.z + normal.z * 0.001);
-                    
-                    const key = `${blockX},${blockY},${blockZ}`;
-                    const blockType = getBlockType(blockX, blockY, blockZ);
-                    world[key] = null;
-                    regenerateChunk(blockX, blockZ);
-                    
-                    // Create break particles
-                    const blockColors = {
-                        'grass': 0x7CFC00, 'dirt': 0x8B4513, 'stone': 0x808080,
-                        'coal_ore': 0x333333, 'iron_ore': 0xC77B00, 
-                        'gold_ore': 0xFFD700, 'diamond_ore': 0x00FFFF
+                // Create break particles
+                const blockType = targetBlock.type;
+                const blockColors = {
+                    'grass': 0x7CFC00, 'dirt': 0x8B4513, 'stone': 0x808080,
+                    'coal_ore': 0x333333, 'iron_ore': 0xC77B00, 
+                    'gold_ore': 0xFFD700, 'diamond_ore': 0x00FFFF
+                };
+                const color = blockColors[blockType] || 0x8B4513;
+                for (let i = 0; i < 8; i++) {
+                    createParticle(
+                        x + Math.random(),
+                        y + Math.random(), 
+                        z + Math.random(),
+                        color
+                    );
+                }
+                
+                // Broadcast block break to multiplayer
+                if (socket) {
+                    const msg = {
+                        type: 'blockBroken',
+                        x: x,
+                        y: y,
+                        z: z,
+                        senderId: myPlayerId
                     };
-                    const color = blockColors[blockType] || 0x8B4513;
-                    for (let i = 0; i < 8; i++) {
-                        createParticle(
-                            blockX + Math.random(),
-                            blockY + Math.random(), 
-                            blockZ + Math.random(),
-                            color
-                        );
-                    }
+                    console.log('[SEND] blockBroken:', msg);
+                    sendMultiplayer(msg);
+                }
+                
+            } else if (e.button === 2) {
+                // Right click - place block
+                const { placeX, placeY, placeZ } = targetBlock;
+                const key = `${placeX},${placeY},${placeZ}`;
+                
+                // Check if position is empty and not inside player
+                const playerBox = {
+                    minX: Math.floor(camera.position.x) - 1,
+                    maxX: Math.floor(camera.position.x) + 1,
+                    minY: Math.floor(camera.position.y - 1.5),
+                    maxY: Math.floor(camera.position.y + 0.5),
+                    minZ: Math.floor(camera.position.z) - 1,
+                    maxZ: Math.floor(camera.position.z) + 1
+                };
+                
+                const wouldCollide = placeX >= playerBox.minX && placeX <= playerBox.maxX &&
+                                   placeY >= playerBox.minY && placeY <= playerBox.maxY &&
+                                   placeZ >= playerBox.minZ && placeZ <= playerBox.maxZ;
+                
+                if (!getBlockType(placeX, placeY, placeZ) && !wouldCollide) {
+                    world[key] = selectedBlock;
+                    regenerateChunk(placeX, placeZ);
                     
-                    // Send to multiplayer
-                    sendBlockChange(blockX, blockY, blockZ, null);
-                    
-                } else if (e.button === 2) {
-                    // Right click - place block
-                    const blockX = Math.floor(hitPoint.x - normal.x * 0.001);
-                    const blockY = Math.floor(hitPoint.y - normal.y * 0.001);
-                    const blockZ = Math.floor(hitPoint.z - normal.z * 0.001);
-                    
-                    const newX = blockX + Math.sign(normal.x);
-                    const newY = blockY + Math.sign(normal.y);
-                    const newZ = blockZ + Math.sign(normal.z);
-                    
-                    const key = `${newX},${newY},${newZ}`;
-                    if (!getBlockType(newX, newY, newZ)) {
-                        world[key] = selectedBlock;
-                        regenerateChunk(newX, newZ);
-                        
-                        // Send to multiplayer
-                        sendBlockChange(newX, newY, newZ, selectedBlock);
+                    // Broadcast to multiplayer
+                    if (socket) {
+                        const msg = {
+                            type: 'blockPlaced',
+                            x: placeX,
+                            y: placeY,
+                            z: placeZ,
+                            blockType: selectedBlock,
+                            senderId: myPlayerId
+                        };
+                        console.log('[SEND] blockPlaced:', msg);
+                        sendMultiplayer(msg);
                     }
                 }
             }
@@ -1230,7 +1607,8 @@
         const waterLevel = 32;
         const maxHeight = 96; // Tall mountains!
 
-        function hash(x, z, seed = 0) {
+        function hash(x, z, seed = null) {
+            if (seed === null) seed = worldSeed; // Use shared world seed
             let h = seed + x * 374761393 + z * 668265263;
             h = (h ^ (h >> 13)) * 1274126177;
             return (h ^ (h >> 16)) / 2147483648.0;
@@ -1267,6 +1645,7 @@
 
         const world = {};
         const chunks = {}; // Store chunk meshes
+        const caveCache = {}; // Cache cave calculations
         const CHUNK_SIZE = 16;
         const RENDER_DISTANCE = 1; // chunks (1 * 16 = 16 blocks)
 
@@ -1311,18 +1690,26 @@
                         height = Math.floor(waterLevel + mountainHeight + peakDetail);
                         height = Math.min(height, 250); // Cap at 250 for extreme
                     } else {
-                        // Normal, snowy, desert - rolling hills
+                        // Normal, snowy, desert - rolling hills with biomes
+                        const biomeNoise = fractalNoise(x * 0.005, z * 0.005, 2);
                         const continentalness = fractalNoise(x * 0.5, z * 0.5, 2) * 0.5 + 0.5;
                         const erosion = fractalNoise(x, z, 3) * 0.5 + 0.5;
                         const peaksValleys = fractalNoise(x * 2, z * 2, 4);
                         
                         if (continentalness > 0.6) {
-                            // Hills
-                            const hillHeight = (continentalness - 0.6) * 80;
-                            const hillDetail = peaksValleys * 15;
+                            // Mountains biome
+                            const hillHeight = (continentalness - 0.6) * 50;
+                            const hillDetail = peaksValleys * 10;
                             height = Math.floor(waterLevel + 8 + hillHeight + hillDetail);
+                        } else if (biomeNoise > 0.3) {
+                            // Hills biome
+                            const hillHeight = biomeNoise * 30;
+                            height = Math.floor(waterLevel + 5 + hillHeight + peaksValleys * 8);
+                        } else if (biomeNoise < -0.2) {
+                            // River/valley biome
+                            height = Math.floor(waterLevel - 2 + Math.abs(biomeNoise) * 5);
                         } else {
-                            // Plains
+                            // Plains biome
                             const plainHeight = fractalNoise(x * 0.8, z * 0.8, 2) * 6;
                             height = Math.floor(waterLevel + 2 + plainHeight);
                         }
@@ -1397,7 +1784,7 @@
             } else if (y === height && height > waterLevel) {
                 // Surface block depends on world type
                 if (selectedWorldType === 'snowy') {
-                    return 'snow';
+                    return 'snow_grass';
                 } else if (selectedWorldType === 'desert') {
                     return 'sand';
                 } else {
@@ -1411,26 +1798,73 @@
                     return 'dirt';
                 }
             } else if (y > height - 2 && height <= waterLevel) {
-                return 'dirt'; // Less dirt underwater
+                // Less dirt underwater (or sand in desert)
+                if (selectedWorldType === 'desert') {
+                    return 'sand';
+                } else {
+                    return 'dirt';
+                }
             } else {
+                // Underground - check for caves first (with caching)
+                const caveKey = `${x},${y},${z}`;
+                let isCave = caveCache[caveKey];
+                
+                if (isCave === undefined) {
+                    const caveNoise1 = fractalNoise(x * 0.05, z * 0.05, 3) + fractalNoise(y * 0.1, x * 0.05, 2);
+                    const caveNoise2 = fractalNoise(z * 0.05, y * 0.1, 3) + fractalNoise(x * 0.05, z * 0.05, 2);
+                    const caveThreshold = 0.6;
+                    isCave = y > 5 && y < height - 5 && Math.abs(caveNoise1) < caveThreshold && Math.abs(caveNoise2) < caveThreshold;
+                    caveCache[caveKey] = isCave;
+                }
+                
+                // Create caves
+                if (isCave) {
+                    return null; // Cave air
+                }
+                
                 // Underground - stone with ores
                 const oreRand = Math.random();
                 const depth = height - y;
                 
-                if (depth > 40 && oreRand < 0.001) {
+                // Biome-based ore distribution
+                const biomeType = Math.abs(fractalNoise(x * 0.01, z * 0.01, 2));
+                
+                if (y < 5) {
+                    return 'bedrock'; // Bedrock layer at bottom
+                }
+                else if (depth > 40 && oreRand < 0.002) {
                     return 'diamond_ore'; // Very rare, deep
                 }
-                else if (depth > 25 && oreRand < 0.005) {
+                else if (depth > 25 && oreRand < 0.008) {
                     return 'gold_ore'; // Rare, medium-deep
                 }
-                else if (depth > 15 && oreRand < 0.015) {
+                else if (depth > 20 && oreRand < 0.01 && biomeType > 0.5) {
+                    return 'lapis_ore'; // Lapis in specific biomes
+                }
+                else if (depth > 15 && oreRand < 0.02) {
                     return 'iron_ore'; // Uncommon, medium depth
                 }
-                else if (depth > 5 && oreRand < 0.04) {
+                else if (depth > 10 && oreRand < 0.015 && biomeType < 0.3) {
+                    return 'redstone_ore'; // Redstone in specific areas
+                }
+                else if (depth > 5 && oreRand < 0.05) {
                     return 'coal_ore'; // Common, any depth
+                }
+                else if (oreRand < 0.03) {
+                    return 'gravel'; // Random gravel pockets
                 }
                 
                 return 'stone'; // Default stone
+            }
+        }
+
+        // Set block type in world (for multiplayer sync)
+        function setBlockType(x, y, z, blockType) {
+            const blockKey = `${x},${y},${z}`;
+            if (blockType === null) {
+                world[blockKey] = null; // Mark as removed
+            } else {
+                world[blockKey] = blockType; // Set block type
             }
         }
 
@@ -1524,8 +1958,9 @@
                                 
                                 // Determine texture based on face and block type
                                 let texture;
-                                if (blockType === 'grass' || blockType === 'oak_log' || blockType === 'slab') {
-                                    // Multi-texture blocks
+                                // Check if block has directional textures
+                                if (blockTypes[blockType] && (blockTypes[blockType].sideTexture || blockTypes[blockType].bottomTexture)) {
+                                    // Multi-texture blocks (grass, logs, TNT, furnace, etc.)
                                     if (face.dir === 'top') {
                                         texture = blockTypes[blockType].texture;
                                     } else if (face.dir === 'bottom') {
@@ -1535,10 +1970,16 @@
                                     }
                                 } else {
                                     // Single texture blocks
-                                    texture = blockTypes[blockType].texture;
+                                    texture = blockTypes[blockType] ? blockTypes[blockType].texture : null;
                                 }
                                 
-                                const mat = new THREE.MeshLambertMaterial({ map: texture });
+                                // Only apply transparency to blocks that need it
+                                const needsTransparency = blockType === 'oak_leaves' || blockType === 'red_flower' || blockType === 'yellow_flower';
+                                const mat = new THREE.MeshLambertMaterial({ 
+                                    map: texture,
+                                    alphaTest: needsTransparency ? 0.9 : 0,
+                                    transparent: needsTransparency
+                                });
                                 const mesh = new THREE.Mesh(geo, mat);
                                 geometries[specialKey].push(mesh);
                             });
@@ -1583,15 +2024,59 @@
                         const treeHeight = 6 + Math.floor(Math.random() * 3);
                         const trunkTop = treeGroundHeight + treeHeight;
                         
-                        // Tree trunk
+                        // Tree trunk - using proper directional textures
                         for (let ty = treeGroundHeight + 1; ty <= trunkTop; ty++) {
-                            if (!geometries['oak_log']) geometries['oak_log'] = [];
-                            const geo = new THREE.BoxGeometry(1, 1, 1);
-                            geo.translate(tx, ty, tz);
-                            geometries['oak_log'].push(geo);
+                            // Create trunk with proper top/side/bottom textures
+                            const faces = [
+                                { dir: 'right', normal: [1, 0, 0] },
+                                { dir: 'left', normal: [-1, 0, 0] },
+                                { dir: 'top', normal: [0, 1, 0] },
+                                { dir: 'bottom', normal: [0, -1, 0] },
+                                { dir: 'front', normal: [0, 0, 1] },
+                                { dir: 'back', normal: [0, 0, -1] }
+                            ];
+                            
+                            faces.forEach(face => {
+                                const geo = new THREE.PlaneGeometry(1, 1);
+                                
+                                if (face.dir === 'right') {
+                                    geo.rotateY(Math.PI / 2);
+                                    geo.translate(tx + 0.5, ty, tz);
+                                } else if (face.dir === 'left') {
+                                    geo.rotateY(-Math.PI / 2);
+                                    geo.translate(tx - 0.5, ty, tz);
+                                } else if (face.dir === 'top') {
+                                    geo.rotateX(-Math.PI / 2);
+                                    geo.translate(tx, ty + 0.5, tz);
+                                } else if (face.dir === 'bottom') {
+                                    geo.rotateX(Math.PI / 2);
+                                    geo.translate(tx, ty - 0.5, tz);
+                                } else if (face.dir === 'front') {
+                                    geo.translate(tx, ty, tz + 0.5);
+                                } else if (face.dir === 'back') {
+                                    geo.rotateY(Math.PI);
+                                    geo.translate(tx, ty, tz - 0.5);
+                                }
+                                
+                                // Determine texture based on face
+                                let texture;
+                                if (face.dir === 'top' || face.dir === 'bottom') {
+                                    texture = blockTypes['oak_log'].texture;
+                                } else {
+                                    texture = blockTypes['oak_log'].sideTexture || blockTypes['oak_log'].texture;
+                                }
+                                
+                                const mat = new THREE.MeshLambertMaterial({ 
+                                    map: texture
+                                });
+                                const mesh = new THREE.Mesh(geo, mat);
+                                
+                                if (!geometries['oak_log_faces']) geometries['oak_log_faces'] = [];
+                                geometries['oak_log_faces'].push(mesh);
+                            });
                         }
                         
-                        // Leaves
+                        // Leaves - simple boxes with leaf texture
                         for (let lx = -2; lx <= 2; lx++) {
                             for (let lz = -2; lz <= 2; lz++) {
                                 for (let ly = -1; ly <= 2; ly++) {
@@ -1637,9 +2122,9 @@
                                         const isRoof = byy === buildingGroundHeight + bh;
                                         
                                         if (isWall || isRoof) {
-                                            let blockType = 'oak_planks';
+                                            let blockType = 'light_planks';
                                             if (building.type === 'tower') blockType = 'stone';
-                                            if (isRoof) blockType = 'oak_planks';
+                                            if (isRoof) blockType = 'light_planks';
                                             
                                             if (!geometries[blockType]) geometries[blockType] = [];
                                             const geo = new THREE.BoxGeometry(1, 1, 1);
@@ -1662,6 +2147,9 @@
                 // All blocks now use face culling (ending with _culled)
                 if (blockType.endsWith('_culled')) {
                     geometries[blockType].forEach(mesh => chunkGroup.add(mesh));
+                } else if (blockType === 'oak_log_faces') {
+                    // Tree trunks with proper directional textures (already meshed)
+                    geometries[blockType].forEach(mesh => chunkGroup.add(mesh));
                 } else {
                     // Trees and other non-culled blocks
                     const mergedGeo = mergeGeometries(geometries[blockType]);
@@ -1674,7 +2162,7 @@
                         map: blockTypes[originalBlockType]?.texture || blockTypes[originalBlockType],
                         transparent: isTransparent || isFlower,
                         opacity: isTransparent ? 0.7 : 1,
-                        alphaTest: isFlower ? 0.5 : 0,
+                        alphaTest: isFlower ? 0.9 : 0,
                         side: isFlower ? THREE.DoubleSide : THREE.FrontSide
                     });
                     
@@ -1702,6 +2190,36 @@
             // Generate new chunk
             generateChunk(chunkX, chunkZ);
         }
+
+        // Regenerate chunks around a block change
+        function regenerateChunksAroundBlock(x, y, z) {
+            const chunkX = Math.floor(x / CHUNK_SIZE);
+            const chunkZ = Math.floor(z / CHUNK_SIZE);
+            
+            // Regenerate the chunk containing the block
+            regenerateChunk(x, z);
+            
+            // Regenerate adjacent chunks if the block is on a chunk boundary
+            const localX = x - chunkX * CHUNK_SIZE;
+            const localZ = z - chunkZ * CHUNK_SIZE;
+            
+            if (localX === 0) regenerateChunk(x - 1, z);
+            if (localX === CHUNK_SIZE - 1) regenerateChunk(x + 1, z);
+            if (localZ === 0) regenerateChunk(x, z - 1);
+            if (localZ === CHUNK_SIZE - 1) regenerateChunk(x, z + 1);
+        }
+
+        // Regenerate all visible chunks (for multiplayer sync)
+        function regenerateAllChunks() {
+            console.log('Regenerating all chunks...');
+            Object.keys(chunks).forEach(chunkKey => {
+                const [chunkX, chunkZ] = chunkKey.split(',').map(Number);
+                scene.remove(chunks[chunkKey]);
+                delete chunks[chunkKey];
+                generateChunk(chunkX, chunkZ);
+            });
+        }
+
 
         // Fallback merge function if BufferGeometryUtils not available
         function mergeGeometries(geometries) {
@@ -1852,7 +2370,7 @@
         }
         
         function spawnAnimals() {
-            const animalCount = 8 + Math.floor(Math.random() * 8);
+            const animalCount = 3 + Math.floor(Math.random() * 3);
             for (let i = 0; i < animalCount; i++) {
                 const type = animalTypes[Math.floor(Math.random() * animalTypes.length)];
                 animals.push(createAnimal(type));
@@ -1862,19 +2380,50 @@
         
         function updateAnimals() {
             animals.forEach(animal => {
+                // Simple AI: Random movement every few frames
                 if (Math.random() < 0.02) {
-                    animal.vx = (Math.random() - 0.5) * 0.04;
-                    animal.vz = (Math.random() - 0.5) * 0.04;
+                    animal.vx = (Math.random() - 0.5) * 0.06;
+                    animal.vz = (Math.random() - 0.5) * 0.06;
                 }
                 
+                // Apply movement
                 animal.x += animal.vx;
                 animal.z += animal.vz;
                 
-                const groundHeight = getTerrainHeight(animal.x, animal.z) + 0.5;
-                animal.y = groundHeight;
+                // Apply gravity
+                if (!animal.vy) animal.vy = 0;
+                animal.vy -= 0.02; // Gravity
+                animal.y += animal.vy;
                 
+                // Ground collision
+                const groundHeight = getTerrainHeight(animal.x, animal.z) + 0.5;
+                if (animal.y <= groundHeight) {
+                    animal.y = groundHeight;
+                    animal.vy = 0;
+                    // Random jump
+                    if (Math.random() < 0.01) {
+                        animal.vy = 0.15;
+                    }
+                }
+                
+                // Friction
+                animal.vx *= 0.95;
+                animal.vz *= 0.95;
+                
+                // Avoid falling off edges
+                const nextGroundHeight = getTerrainHeight(animal.x + animal.vx * 10, animal.z + animal.vz * 10);
+                if (Math.abs(nextGroundHeight - animal.y) > 3) {
+                    animal.vx *= -0.5;
+                    animal.vz *= -0.5;
+                }
+                
+                // Update mesh position
                 if (animal.mesh) {
                     animal.mesh.position.set(animal.x, animal.y, animal.z);
+                    // Rotate to face movement direction
+                    if (Math.abs(animal.vx) > 0.01 || Math.abs(animal.vz) > 0.01) {
+                        animal.mesh.rotation.y = Math.atan2(animal.vx, animal.vz);
+                    }
                 }
             });
         }
@@ -1920,6 +2469,18 @@
             generateTerrain().then(() => {
                 spawnAnimals();
                 // Flying mode enabled - no gravity, no mobs
+                
+                // Load blocks from multiplayer after terrain is ready
+                if (pendingBlocks) {
+                    console.log('Loading pending blocks after terrain generation:', Object.keys(pendingBlocks).length);
+                    Object.keys(pendingBlocks).forEach(key => {
+                        const [x, y, z] = key.split(',').map(Number);
+                        const blockType = pendingBlocks[key];
+                        setBlockType(x, y, z, blockType);
+                    });
+                    regenerateAllChunks();
+                    pendingBlocks = null; // Clear pending blocks
+                }
             });
         }
         
@@ -2085,15 +2646,39 @@
                     lastFpsTime = now;
                     const info = document.getElementById('info');
                     if (info && info.querySelector('h3')) {
-                        info.querySelector('h3').textContent = `*** MINECRAFT NESA EXPLORER 5 *** | FPS: ${currentFps}`;
+                        const multiplayerText = socket && socket.readyState === WebSocket.OPEN ? ' | MULTIPLAYER' : '';
+                        info.querySelector('h3').textContent = `*** MINECRAFT NESA EXPLORER 5 *** | FPS: ${currentFps}${multiplayerText}`;
                     }
                 }
+            }
+            
+            // Broadcast player position to multiplayer (throttled to 20 updates/sec)
+            if (socket && socket.readyState === WebSocket.OPEN && (!window.lastPositionUpdate || Date.now() - window.lastPositionUpdate > 50)) {
+                sendMultiplayer({
+                    type: 'playerMovement',
+                    x: camera.position.x,
+                    y: camera.position.y,
+                    z: camera.position.z,
+                    rotationY: yaw
+                });
+                window.lastPositionUpdate = Date.now();
             }
             
             // Flying mode - no gravity
             // Fly up with Space
             if (keys.Space) {
                 camera.position.y += FLY_SPEED;
+            }
+            
+            // Broadcast player position to multiplayer (throttled)
+            if (!window.lastPositionUpdate || Date.now() - window.lastPositionUpdate > 50) {
+                socket.emit('playerMovement', {
+                    x: camera.position.x,
+                    y: camera.position.y,
+                    z: camera.position.z,
+                    rotationY: yaw
+                });
+                window.lastPositionUpdate = Date.now();
             }
             
             // Fly down with Shift
@@ -2122,6 +2707,61 @@
             
             // Update particles
             updateParticles();
+            
+            // Update block targeting cursor
+            if (isLocked) {
+                const direction = new THREE.Vector3(0, 0, -1);
+                direction.applyQuaternion(camera.quaternion);
+                raycaster.set(camera.position, direction);
+                
+                const allMeshes = [];
+                for (const chunkKey in chunks) {
+                    chunks[chunkKey].children.forEach(mesh => {
+                        allMeshes.push(mesh);
+                        if (mesh.children && mesh.children.length > 0) {
+                            mesh.children.forEach(child => allMeshes.push(child));
+                        }
+                    });
+                }
+                
+                const intersects = raycaster.intersectObjects(allMeshes, true);
+                
+                if (intersects.length > 0) {
+                    const intersect = intersects[0];
+                    const hitPoint = intersect.point;
+                    const normal = intersect.face.normal;
+                    
+                    // Calculate block being looked at
+                    const blockX = Math.floor(hitPoint.x - normal.x * 0.5);
+                    const blockY = Math.floor(hitPoint.y - normal.y * 0.5);
+                    const blockZ = Math.floor(hitPoint.z - normal.z * 0.5);
+                    
+                    // Calculate placement position
+                    const placeX = Math.floor(hitPoint.x + normal.x * 0.5);
+                    const placeY = Math.floor(hitPoint.y + normal.y * 0.5);
+                    const placeZ = Math.floor(hitPoint.z + normal.z * 0.5);
+                    
+                    targetBlock = {
+                        x: blockX,
+                        y: blockY,
+                        z: blockZ,
+                        placeX: placeX,
+                        placeY: placeY,
+                        placeZ: placeZ,
+                        type: getBlockType(blockX, blockY, blockZ)
+                    };
+                    
+                    // Show highlight at target block
+                    highlightMesh.position.set(blockX, blockY, blockZ);
+                    highlightMesh.visible = true;
+                } else {
+                    targetBlock = null;
+                    highlightMesh.visible = false;
+                }
+            } else {
+                targetBlock = null;
+                highlightMesh.visible = false;
+            }
             
             // Day/night cycle
             timeOfDay = (timeOfDay + 1) % 24000;
